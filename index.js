@@ -7,13 +7,28 @@ const client = new Client({
     ]
 });
 const { token, prefix } = require('./config.json');
+// List of forbidden words
+const forbiddenWords = ['badword1', 'badword2', 'badword3'];
+
+// Set the fake activity status
+const { ActivityType } = require('discord.js')
+
 
 client.once('ready', () => {
     console.log('Bot is ready.');
+
+    
+client.user.setPresence({ 
+    activities: [{ 
+        name: 'you hit that bong.', 
+        type: ActivityType.Watching,
+        status: 'online'
+    }], 
+    
+});
 });
 
-// List of forbidden words
-const forbiddenWords = ['badword1', 'badword2', 'badword3'];
+
 
 client.on('messageCreate', async message => {
     if (message.author.bot) return; // Ignore messages from bots
